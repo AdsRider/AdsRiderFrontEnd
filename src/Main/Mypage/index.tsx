@@ -41,6 +41,15 @@ function Mypage() {
         </>
       );
     }
+    if (props.level === '광고주') {
+      return (
+        <>
+          <Button type="primary" onClick={() => getStatistics('12', '12')}>
+          통계 보기
+          </Button>
+        </>
+      );
+    }
     return <></>
   }
 

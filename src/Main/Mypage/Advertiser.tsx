@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Image, Collapse, Descriptions } from "antd";
 import Map from "./Map";
+import BigNumber from "bignumber.js";
 
 interface AdvertiserData {
   id: string;
@@ -32,9 +33,11 @@ const Advertiser: React.FC<AdvertiserProps> = ({ from, to }) => {
   const [advertiserData, setAdvertiserData] = useState<AdvertiserData[]>([]);
   const [isNone, setNone] = useState(true);
   const riderTotalAmount = advertiserData.map((data, index) =>{
-    return data.data.reduce((acc, cur)=>{
-      return acc+ parseFloat(cur.reward);
-    }, 0)
+    return data.data.reduce((acc, cur) => {
+      return cur.reward == null
+        ? acc
+        : new BigNumber(cur.reward).plus(acc)
+    }, new BigNumber(0)).toFixed()
   })
   useEffect(() => {
     axios

@@ -17,6 +17,32 @@ function Mypage() {
   const [balance, setBalance] = useState<UserBalance[]>([]);
   const [userTypeComponent, setUserTypeComponent] = useState<JSX.Element | null>(null);
   const adsBalance = balance.find((b) => b.type === 'ADS')?.available || '0';
+  // DatePicker 정의
+  const DatePicker = (props : {level: string}) => {
+    if (props.level === '라이더') {
+      return (
+        <>
+          <Text>날짜 선택 </Text>
+          <StyledDatePicker onChange={datePickerChange}/>
+          <Button type="primary" onClick={() => getStatistics(isFrom, isTo)}>
+          통계 보기
+          </Button>
+        </>
+      );
+    }
+    if (props.level === '운영자') {
+      return (
+        <>
+          <Text>날짜 선택 </Text>
+          <StyledRangePicker onChange={rangePickerChange}/>
+          <Button type="primary" onClick={() => getStatistics(isFrom, isTo)}>
+          통계 보기
+          </Button>
+        </>
+      );
+    }
+    return <></>
+  }
 
   // RangePicker 운영자, 광고주는 날짜 제한 X
   const rangePickerChange = (dates: any, dateStrings: [string, string]) => {
@@ -71,14 +97,11 @@ function Mypage() {
           <Descriptions.Item label="개인 지갑 주소">{user.address}</Descriptions.Item>
         </Descriptions>
         <StatsDiv>
-          <Text>날짜 선택 </Text>
-          {user.level === '라이더'
-          ? <StyledDatePicker onChange={datePickerChange}/>
-          : ''}
-          <Button type="primary" onClick={() => getStatistics(isFrom, isTo)}>
-            통계 보기
-          </Button>
+        <DatePicker level = {user.level}></DatePicker>
         </StatsDiv>
+
+
+
         {userTypeComponent}
 
     </MypageDiv>

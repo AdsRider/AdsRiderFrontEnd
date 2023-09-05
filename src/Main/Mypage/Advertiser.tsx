@@ -41,12 +41,7 @@ const Advertiser: React.FC<AdvertiserProps> = ({ from, to }) => {
   })
   useEffect(() => {
     axios
-      .get<AdvertiserData[]>("/api/statistics", {
-        params: {
-          from: from,
-          to: to,
-        },
-      })
+      .get<AdvertiserData[]>("/api/statistics")
       .then((res) => {
         if(res.data)
           setNone(false)

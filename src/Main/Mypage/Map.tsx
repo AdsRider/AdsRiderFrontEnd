@@ -49,10 +49,8 @@ export default function Map( { data } : any ) {
     window.kakao.maps.load(() => {
     let i = 0;
     data.forEach((adsHistory : any) => {
-      console.log(adsHistory);
         if(adsHistory) {
             for (const p of adsHistory.path){
-              console.log(p);
               polyPath[i].push(new window.kakao.maps.LatLng(p.latitude, p.longitude));
             } };
         i += 1;

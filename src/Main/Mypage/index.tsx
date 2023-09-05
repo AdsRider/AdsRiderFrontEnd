@@ -74,7 +74,7 @@ function Mypage() {
           <Text>날짜 선택 </Text>
           {user.level === '라이더'
           ? <StyledDatePicker onChange={datePickerChange}/>
-          :<StyledRangePicker onChange={rangePickerChange} />}
+          : ''}
           <Button type="primary" onClick={() => getStatistics(isFrom, isTo)}>
             통계 보기
           </Button>

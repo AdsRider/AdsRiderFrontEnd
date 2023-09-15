@@ -1,3 +1,5 @@
+import moment from "moment";
+
 export {};
 
 export function dateConverter(date : Date){
@@ -15,3 +17,13 @@ export interface UserBalance {
   amount: string
   available: string
 }
+
+export const datePrettier = (dateFormat: string | number | Date) => {
+  const date = new Date(dateFormat);
+
+  if (Number.isNaN(date)) {
+    throw new Error('unsupported date format');
+  }
+
+  return moment(date).format('YYYY-MM-DD');
+};

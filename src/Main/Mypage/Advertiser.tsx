@@ -1,8 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Image, Collapse, Descriptions } from "antd";
-import Map from "./Map";
 import BigNumber from "bignumber.js";
+import Map from "./Map";
+import { datePrettier } from "../../Utils";
 
 interface AdvertiserData {
   id: string;
@@ -72,8 +73,8 @@ const Advertiser: React.FC<AdvertiserProps> = ({ from, to }) => {
             <Descriptions.Item label="리워드 지급">{riderTotalAmount[index]} ADS</Descriptions.Item>
             <Descriptions.Item label="광고 리워드"> {data.reward} ADS</Descriptions.Item>
             <Descriptions.Item label="광고 이름">{data.title}</Descriptions.Item>
-            <Descriptions.Item label="시작 날짜">{data.start_date.toString().slice(0, 10)}</Descriptions.Item>
-            <Descriptions.Item label="종료 날짜">{data.end_date.toString().slice(0, 10)}</Descriptions.Item>
+            <Descriptions.Item label="시작 날짜">{datePrettier(data.start_date)}</Descriptions.Item>
+            <Descriptions.Item label="종료 날짜">{datePrettier(data.end_date)}</Descriptions.Item>
             <Descriptions.Item label="광고 내용">{data.subtitle}</Descriptions.Item>
           </Descriptions> <br/>
           {data.data && <Map data={data.data} />}
